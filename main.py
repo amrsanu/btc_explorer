@@ -1,10 +1,12 @@
 from lib.runner import exec_command
 from time import sleep
 import argparse
+import os
 from lib.blockchain import generate_blocks, print_blocks
+import config
 
 def start_bitcoin_daemon():
-    exec_command("bitcoind -daemon")
+    exec_command(f"./{os.path.join(config.bitcoin_src, 'bitcoind')} -daemon")
     sleep(10)
 
 
@@ -21,11 +23,11 @@ if __name__ == "__main__":
     try:
         start_bitcoin_daemon()
         load_wallet()
-        exec_command("bitcoin-cli -getinfo")
+        exec_command(f"./{os.path.join(config.bitcoin_src, 'bitcoin-cli')} -getinfo")
         generate_blocks(args.block_count)
         print_blocks(args.block_count)
 
     finally:
-        exec_command("bitcoin-cli stop")
+        exec_command(f"./{os.path.join(config.bitcoin_src, 'bitcoin-cli')} stop")
         sleep(5)
         print("Stopped Bitcoind -deamon.")
