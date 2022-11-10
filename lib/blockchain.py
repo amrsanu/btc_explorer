@@ -15,8 +15,7 @@ def generate_blocks(count):
         output, error = get_output(f"./{os.path.join(config.bitcoin_src, 'bitcoin-cli')} -getinfo")
         if "Chain: main" in output:
             print("Cannot generate blocks on demand on Main chain.")
-            print("Generating available number of block headers.")
-            exec_command(f"./{os.path.join(config.bitcoin_src, 'bitcoin-cli')} -generate {block_count}")
+            print("Using available number of block headers.")
         elif count > block_count:
             print(f"Generating {count-int(output)+1} blocks.")
             exec_command(f"./{os.path.join(config.bitcoin_src, 'bitcoin-cli')} -generate {count-block_count+1}")
