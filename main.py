@@ -34,5 +34,5 @@ if __name__ == "__main__":
         print_blocks(args.block_count)
 
     finally:
-        stop_bitcoin_daemon()
-        print("Stopped Bitcoind -deamon.")
+        # stop_bitcoin_daemon()
+        print("Exiting BTC-Explorer thread.")
