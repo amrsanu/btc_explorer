@@ -16,7 +16,7 @@ def generate_blocks(count):
         if "Chain: main" in output:
             print("Cannot generate blocks on demand on Main chain.")
             print("Using available number of block headers.")
-        elif count > block_count:
+        elif "Chain: regtest" in output and count > block_count:
             print(f"Generating {count-int(output)+1} blocks.")
             exec_command(f"./{os.path.join(config.bitcoin_src, 'bitcoin-cli')} -generate {count-block_count+1}")
         else:
