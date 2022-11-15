@@ -70,7 +70,7 @@ def populate_crc16(debug, sample_header = None):
     with open(sample_header, "r") as header:
         block_header = header.readlines()
         for line in block_header:
-            if len(line.strip().split()) == 6:
+            if len(line.strip().split()) == 6 and line[0] != '#':
                 block_header_crc16(line, debug)
     
     print("     CRC16 path: {}\n".format(config.sample_crc))

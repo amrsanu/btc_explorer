@@ -46,8 +46,8 @@ def print_blocks(block_count):
         block = get_output(f"./{os.path.join(config.bitcoin_src, 'bitcoin-cli')} getblockheader {block_hash}")[0]
         block = json.loads(block)
         # print(type(block), block)
-        block_data = f'{block["versionHex"]} {block["previousblockhash"]} {block["merkleroot"]} {hex(block["time"])} {block["bits"]} {hex(block["nonce"]-config.nonce_range)}'
-        print(block_data)
+        block_data = f'{block["versionHex"]} {block["previousblockhash"]} {block["merkleroot"]} {hex(block["time"])[2:]} {block["bits"]} {hex(block["nonce"]-config.nonce_range)[2:]}\n'
+        print(block_data, end=" ")
         header_file.write(block_data)
     
     print("Sample header path: {}\n".format(config.sample_header))

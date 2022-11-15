@@ -23,7 +23,6 @@ def load_wallet():
 
 
 if __name__ == "__main__":
-    # os.chdir(config.bitcoin_home)
     parser = argparse.ArgumentParser()
     parser.add_argument("-g", dest="block_count", type=int, default=1, help="Number of block header to generate")
     parser.add_argument("-d", dest="debug", type=int, default=0, help="Debug Mode: Generates detailed CRC16 of all the block headers")
@@ -31,17 +30,19 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     print(args)
-
+    cwd = os.getcwd()
     try:
         if args.header_crc == None:
+            os.chdir(config.bitcoin_home)
             config.validate_config()
 
-            start_bitcoin_daemon()
+            # start_bitcoin_daemon()
             load_wallet()
             exec_command(f"./{os.path.join(config.bitcoin_src, 'bitcoin-cli')} -getinfo")
             generate_blocks(args.block_count)
             print_blocks(args.block_count)
 
+        os.chdir(cwd)
         populate_crc16(args.debug, args.header_crc)
         
     finally:
