@@ -9,6 +9,10 @@ def get_block_header(verHex, previousblockhash, merkleroot, time, bits, nonce):
 
     if len(verHex) != 8:
         verHex = "{:<0}".format(verHex)
+
+    nonce = f"{nonce:>08}"
+    bits = f"{bits:>08}"
+    time = f"{time:>08}"
     
     raw_header = '{verHex}{previousblockhash}{merkleroot}{time}{bits}{nonce}'.format(
         verHex="".join(reversed([verHex[i:i+2] for i in range(0, len(verHex), 2)])),
